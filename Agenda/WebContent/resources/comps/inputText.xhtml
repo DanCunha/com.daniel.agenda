@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:cc="http://java.sun.com/jsf/composite">
+	  
+	<cc:interface>
+		<cc:attribute name="label" required="true" />
+		<cc:attribute name="value" required="true" />
+		<cc:attribute name="required" default="false"/>
+		<cc:attribute name="requiredMessage" default="O campo #{cc.attrs.id} é obrigatório!"/>
+	</cc:interface>
+	
+	<cc:implementation>
+		<h:panelGrid columns="3">
+			<h:outputText value="#{cc.attrs.label}" />
+			<h:inputText id="xxx" value="#{cc.attrs.value}" required="#{cc.attrs.required}" />
+			<h:message for="xxx" style="color:red"/>
+		</h:panelGrid>
+	</cc:implementation>
+	  
+</html>

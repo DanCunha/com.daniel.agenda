@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/visao/templates/templateShowCase/templateLayout.xhtml">
+		<ui:param name="pTituloTeste" value="#{i18n['lightbox.titulo.teste']}" />
+		
+		<ui:define name="titulo">
+			<h:outputText value="#{i18n['lightbox.nome.pagina']}" />
+		</ui:define>
+	
+		<ui:define name="content">
+				<p:lightBox>
+					<h:outputLink value="/resources/imagens/lightBox/imagem1.jpg" title="Tela1">
+						<p:graphicImage value="/resources/imagens/lightBox/imagem1.jpg" />
+					</h:outputLink>
+						
+					<h:outputLink value="/resources/imagens/lightBox/imagem2.jpg" title="Tela2">
+						<p:graphicImage value="/resources/imagens/lightBox/imagem2.jpg" />
+					</h:outputLink>
+							
+					<h:outputLink value="/resources/imagens/lightBox/imagem3.jpg" title="Tela3">
+						<p:graphicImage value="/resources/imagens/lightBox/imagem3.jpg" />
+					</h:outputLink>
+						
+					<h:outputLink value="/resources/imagens/lightBox/imagem4.jpg" title="Tela4">
+						<p:graphicImage value="/resources/imagens/lightBox/imagem4.jpg" />
+					</h:outputLink>
+				</p:lightBox>
+					
+				<p:lightBox iframe="true" width="80%" height="80%">
+					<h:outputLink value="http://www.iconsolucoes.com"
+						title="Icon Solucoes">
+						<h:outputText value="Icon Solucoes" />
+					</h:outputLink>
+				</p:lightBox>
+		</ui:define>
+		
+	</ui:composition>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition>
+	
+		<h:form id="themeForm">
+		
+			<h:graphicImage value="/resources/imagens/chess.png" />
+			<h:graphicImage value="/resources/imagens/icon_logo.png"/>
+
+			<p:toolbar style="font-size:12px;"> 
+
+				<p:toolbarGroup align="left">
+					<p:menubar model="#{loginBean.menu}"/>
+				</p:toolbarGroup>		 
+
+			    <p:toolbarGroup align="right">
+			    		<p:menubar>
+				            <p:menuitem ajax="false" value="Log-off" action="#{loginBean.doLogoff}" icon="ui-icon ui-icon-key"/>  
+			    		</p:menubar>
+			    </p:toolbarGroup>
+			    
+
+				<p:toolbarGroup align="right">
+			    		<p:menubar>
+				            <p:menuitem value="#{i18n.perfil}: #{loginBean.usuarioLogado.tipoUsuarioEnum}"/>  
+			    		</p:menubar>
+			    </p:toolbarGroup> 
+			
+			    <p:toolbarGroup align="right">
+			    	<p:menubar>
+			    		<p:submenu label="#{i18n.usuarioLogado}: #{loginBean.usuarioLogado.login}">
+			    			<p:menuitem value="#{i18n['alterar.nomeLink']}" url="/visao/loginVisao/alterarSenha.xhtml"/>
+			    		</p:submenu>
+			    	</p:menubar>
+			    </p:toolbarGroup>
+			</p:toolbar>
+			
+		</h:form>
+	</ui:composition>
+	
+</html>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><ui:insert name="title" /></title>
+</h:head>
+
+<h:body>
+
+	<div id="page">
+	<div id="header"><ui:insert name="header">
+		<ui:include src="/visao/templates/cabecalhoPadrao.xhtml" />
+		<p:separator />
+	</ui:insert></div>
+
+	<div id="content">
+	
+		<!-- Mensagens Sumario -->
+		<p:messages	id="msgs" showDetail="true" /> 
+		
+		<h:form id="form" style="font-size:12px">
+			<ui:insert name="breadCrumb"/>
+			
+			<p:idleMonitor timeout="50000" onidle="idleDialog.show();"
+						onactive="idleDialog.hide();" />
+			<p:dialog header="#{i18n.idleMonitorNome}" resizable="false"
+				widgetVar="idleDialog" modal="true" width="400">
+				<h:outputText value="#{i18n.idleMonitorMessage}" />
+			</p:dialog>
+             
+			<p:panel header="#{pTituloListagem}">
+			
+				<p:commandButton title="#{i18n['tooltip.btnPesquisar']}" 
+					id="btnPesquisar" ajax="false"
+					actionListener="#{pManagedBean.doPesquisar}"
+					value="#{i18n.btnPesquisar}">
+					<p:ajax render="tabela,exportador" />
+				</p:commandButton>
+	
+				<p:commandButton id="btnNovo" title="#{i18n['tooltip.btnNovo']}" action="#{pManagedBean.showNovo}"
+					value="#{i18n.btnNovo}" ajax="false" rendered="#{pIsExibirBtnNovo}"/>
+					
+				<h:panelGrid id="tabela" columns="1" width="#{pWidthTabela}"
+					rendered="#{pManagedBean.isExibirLista}">
+	
+					<p:dataTable id="tbl" widgetVar="widgetTable" var="item"
+						value="#{pManagedBean.lista}" paginator="true" rows="5"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15" emptyMessage="#{i18n.emptyMessage}"
+						style="font-family:Geneva, Arial, Helvetica, sans-serif; font-size:12px">
+	
+						<!-- Cabeçalho da Lista -->
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:panelGrid columns="2">
+									<h:outputText value="#{pTituloListagem}" />
+									<h:panelGroup>
+										<h:outputLabel value="#{i18n['procurarTodosCampos']}" />
+										<p:spacer width="10px"/>
+										<p:inputText id="globalFilter" onkeyup="itemsTable.filter()"
+											style="width:150px;" />
+									</h:panelGroup>
+								</h:panelGrid>
+							</p:outputPanel>
+						</f:facet>
+	
+						<!-- Coluna ID é mostrada se o sistema estiver em Modo Debug (GenericoBean.getIsModoDebug) -->
+						<p:column width="100px" rendered="#{pManagedBean.isModoDebug}">
+							<f:facet name="header">Id</f:facet>
+							<h:outputText value="#{item.entityId}" />
+						</p:column>
+
+						<!-- COLUNAS DA LISTA - Incluida nas paginas que utilizarem este template -->
+						<ui:insert name="content" />
+	
+						<p:column width="100px">
+	
+							<f:facet name="header">
+								<h:outputText value="#{i18n.colAcao}" />
+							</f:facet>
+	
+							<!-- trecho utilizado para mostrar que nao precisa usar o core:if, mas devemos usar o rendered! -->
+							<h:panelGrid columns="#{pQtdeColunasAcoes}"
+								style="border-color:#FFFFFF">
+								
+								<c:if test="#{pIsExibirAcoesPadrao}">
+									<h:commandLink title="#{i18n['colAcao.editar']}"
+										action="#{pManagedBean.showEditar}">
+										<f:param name="entityId" value="#{item.entityId}" />
+										<p:graphicImage value="/resources/imagens/editar.png" />
+									</h:commandLink>
+		
+									<p:commandLink title="#{i18n['colAcao.excluir']}"
+										onclick="confirmacaoExcluir.show()">
+										<f:setPropertyActionListener value="#{item.entityId}" target="#{pManagedBean.entityIdExclusao}" /> 
+										<p:graphicImage value="/resources/imagens/excluir.png" />
+									</p:commandLink>
+		
+									<h:commandLink title="#{i18n['colAcao.detalhar']}"
+										action="#{pManagedBean.showDetalhar}">
+										<f:param name="entityId" value="#{item.entityId}" />
+										<p:graphicImage value="/resources/imagens/detalhar.png" />
+									</h:commandLink>
+								</c:if>
+	
+								<ui:insert name="demaisAcoes" />
+								
+							</h:panelGrid>
+	
+						</p:column>
+	
+					</p:dataTable>
+				</h:panelGrid>
+	
+				<!-- Exportador Padrão -->
+				<h:panelGrid id="exportador" columns="2" 
+					rendered="#{pManagedBean.isExibirLista}">
+	
+					<p:panel header="#{i18n.colExpDadosPaginaCorrente}">
+	
+						<h:commandLink title="#{i18n['colExpDados.excel']}">
+							<p:graphicImage value="/resources/imagens/excel.png" />
+							<p:dataExporter type="xls" target="tbl" fileName="DadosExportados"
+								pageOnly="true" />
+						</h:commandLink>
+	
+						<h:commandLink title="#{i18n['colExpDados.pdf']}">
+							<p:graphicImage value="/resources/imagens/pdf.png" />
+							<p:dataExporter type="pdf" target="tbl" fileName="DadosExportados"
+								pageOnly="true" />
+						</h:commandLink>
+	
+						<h:commandLink title="#{i18n['colExpDados.csv']}">
+							<p:graphicImage value="/resources/imagens/csv.png" />
+							<p:dataExporter type="csv" target="tbl" fileName="DadosExportados"
+								pageOnly="true" />
+						</h:commandLink>
+	
+						<h:commandLink title="#{i18n['colExpDados.xml']}">
+							<p:graphicImage value="/resources/imagens/xml.png" />
+							<p:dataExporter type="xml" target="tbl" fileName="DadosExportados"
+								pageOnly="true" />
+						</h:commandLink>
+	
+					</p:panel>
+	
+					<p:panel header="#{i18n.colExpDados}">
+	
+						<h:commandLink title="#{i18n['colExpDados.excel']}">
+							<p:graphicImage value="/resources/imagens/excel.png" />
+							<p:dataExporter type="xls" target="tbl" fileName="DadosExportados" />
+						</h:commandLink>
+	
+						<h:commandLink title="#{i18n['colExpDados.pdf']}">
+							<p:graphicImage value="/resources/imagens/pdf.png" />
+							<p:dataExporter type="pdf" target="tbl" fileName="DadosExportados" />
+						</h:commandLink>
+	
+						<h:commandLink title="#{i18n['colExpDados.csv']}">
+							<p:graphicImage value="/resources/imagens/csv.png" />
+							<p:dataExporter type="csv" target="tbl" fileName="DadosExportados" />
+						</h:commandLink>
+	
+						<h:commandLink title="#{i18n['colExpDados.xml']}">
+							<p:graphicImage value="/resources/imagens/xml.png" />
+							<p:dataExporter type="xml" target="tbl" fileName="DadosExportados" />
+						</h:commandLink>
+	
+					</p:panel>
+	
+				</h:panelGrid>
+	
+			</p:panel>
+			
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			
+			<!-- Popup para confirmação do excluir objeto da listagem -->
+			<p:confirmDialog id="conf" modal="true" message="#{i18n['popup.excluir.message']}"  
+	                				showEffect="drop" hideEffect="explode"  
+	                				header="#{i18n['popup.excluir.header']}" 
+	                 				widgetVar="confirmacaoExcluir">  
+	                  
+	            <h:panelGrid columns="2">
+			        <p:commandButton value="#{i18n['popup.excluir.btnSim']}" update="tbl,growl" oncomplete="confirmacaoExcluir.hide()"  
+			                    actionListener="#{pManagedBean.doExcluir}" /> 
+			                     
+			        <p:commandButton value="#{i18n['popup.excluir.btnNao']}" onclick="confirmacaoExcluir.hide()" type="button" />   
+	            </h:panelGrid>
+	             
+	   		</p:confirmDialog> 
+		
+		</h:form>
+	
+	</div>
+
+	<p:separator />
+
+	<div id="footer"><ui:insert name="footer">
+		<ui:include src="/visao/templates/rodapePadrao.xhtml" />
+	</ui:insert></div>
+	</div>
+
+</h:body>
+
+</html>

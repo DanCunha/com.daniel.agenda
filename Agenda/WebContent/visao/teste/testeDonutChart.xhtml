@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/visao/templates/templateShowCase/templateLayout.xhtml">
+		<ui:param name="pTituloTeste" value="#{i18n['donut.titulo.teste']}" />
+		
+		<ui:define name="titulo">
+			<h:outputText value="#{i18n['donut.nome.pagina']}" />
+		</ui:define>
+		
+		<ui:define name="content">
+				<p:donutChart value="#{chartBean.donutModel}" legendPosition="w"
+					title="Sample Donut Chart" style="width:400px;height:300px" />
+	
+				<p:donutChart value="#{chartBean.donutModel}" legendPosition="e"
+					sliceMargin="5" showDataLabels="true" dataFormat="value"
+					shadow="false" title="Custom Options"
+					style="width:400px;height:300px" />
+		</ui:define>
+		
+	</ui:composition>
+
+</html>

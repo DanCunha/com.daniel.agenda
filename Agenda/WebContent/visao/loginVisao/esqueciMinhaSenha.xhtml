@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+     <ui:composition template="/visao/templates/template1.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="#{i18n['esqueci.paginaNome']}"></h:outputText>
+		</ui:define>
+			
+		<ui:define name="content">
+			
+			<p:panel header="#{i18n['esqueci.header']}" footer="#{i18n['esqueci.footer']}" style="font-size:12px">  
+				<h:form id="formEsqueciMinhaSenha">
+					<p:inputText label="#{i18n['esqueci.email']}" value="#{loginBean.usuarioEsqueciMinhaSenha.login}"/>
+					<p:commandButton value="#{i18n['esqueci.senha']}" action="#{loginBean.doEnviarNovaSenha}"/>	
+				</h:form>
+			</p:panel> 
+		</ui:define>
+	</ui:composition>
+        
+</html>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:comps="http://java.sun.com/jsf/composite/comps"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/visao/templates/templateLista.xhtml">
+	
+		<!-- Parametro utilizado pelo templateLista -->
+		<ui:param name="pManagedBean" value="#{painelArrematesBean}" />
+		<ui:param name="pTituloListagem" value="#{i18n['arremates.lista.titulo']}" />
+		<ui:param name="pQtdeColunasAcoes" value="2"/>
+		<ui:param name="pWidthTabela" value="100%" />
+		<ui:param name="pIsExibirAcoesPadrao" value="false" />
+		<ui:param name="pIsExibirBtnNovo" value="false" />
+		
+		<ui:define name="title">
+			<h:outputText value="#{i18n['arremates.paginaNome']}" />
+		</ui:define>
+		
+		<ui:define name="content">
+
+			<p:column style="width:100px;text-align:center" 
+			  	headerText="#{i18n['produto.imagem']}">
+				<h:graphicImage value="#{item.imagem.url}"  width="50" height="50"/>
+			</p:column>
+
+			<p:column  width="100px" sortBy="#{item.nome}" 
+				filterBy="#{item.nome}"
+				headerText="#{i18n['produto.nome']}" footerText="#{i18n.colContem}"
+				filterMatchMode="contains">
+				
+				<h:outputText value="#{item.nome}" />
+			</p:column>
+
+			<p:column sortBy="#{item.descricao}"
+				filterBy="#{item.descricao}"
+				headerText="#{i18n['produto.descricao']}" footerText="#{i18n.colContem}"
+				filterMatchMode="contains">
+					
+				<h:outputText value="#{item.descricao}" />
+			</p:column>
+			
+			<p:column sortBy="#{item.categoriasString}"
+				filterBy="#{item.categoriasString}"
+				headerText="#{i18n['produto.categoria']}" footerText="#{i18n.colContem}"  
+	    	    filterMatchMode="contains">
+	    	    	
+	    	    <h:outputText value="#{item.categoriasString}" />
+			</p:column>
+				
+			<p:column style="width:135px;text-align:right" sortBy="#{item.precoInicial}"
+				filterBy="#{item.precoInicial}"
+				headerText="#{i18n['produto.precoInicial']}" footerText="#{i18n.colContem}"
+				filterMatchMode="contains" >
+
+				<h:outputText value="#{item.precoInicial}">
+					<f:convertNumber pattern="#,##">
+					</f:convertNumber>
+				</h:outputText>
+			</p:column>
+			
+			<p:column style="width:100px;text-align:right;#{item.statusLeilaoEnum.css}" sortBy="#{item.statusLeilaoEnum.descricao}"
+				filterBy="#{item.statusLeilaoEnum.descricao}"
+				headerText="#{i18n['leiloeiro.statusLeilao']}" footerText="#{i18n.colContem}"
+				filterMatchMode="contains" >
+				<h:outputText value="#{item.statusLeilaoEnum.descricao}"/>
+			</p:column>
+	
+	
+		</ui:define>
+		
+		<ui:define name="demaisAcoes">
+
+			<h:commandLink title="#{i18n['arremates.demaisAcoes.pagarCartaoCredito']}"
+							action="#{painelArrematesBean.doPagarCartaoCredito}" 
+							update="tbl" rendered="#{item.isExibirPagar}">
+				<f:param name="idProduto" value="#{item.entityId}" />
+				<f:param name="idUsuario" value="#{loginBean.usuarioLogado.entityId}" />
+				<p:graphicImage value="/resources/imagens/cartaoCredito.png" />
+			</h:commandLink>
+
+			<h:commandLink title="#{i18n['arremates.demaisAcoes.pagarBoleto']}"
+							action="#{painelArrematesBean.doPagarBoletoBancario}" 
+							update="tbl" rendered="#{item.isExibirPagar}">
+				<f:param name="idProduto" value="#{item.entityId}" />
+				<f:param name="idUsuario" value="#{loginBean.usuarioLogado.entityId}" />
+				<p:graphicImage value="/resources/imagens/boletoBancario.png" />
+			</h:commandLink>
+										
+		</ui:define>
+		
+	</ui:composition>
+	
+</html>

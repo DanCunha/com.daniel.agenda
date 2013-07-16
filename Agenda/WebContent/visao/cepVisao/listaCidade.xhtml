@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/visao/templates/templateLista.xhtml">
+	<ui:param name="pManagedBean" value="#{cidadeBean}" />
+	<ui:param name="pTituloListagem" value="#{i18n['cidade.lista.titulo']}"/>
+	<ui:param name="pQtdeColunasAcoes" value="4" />
+	<ui:param name="pWidthTabela" value="100%" />
+	<ui:param name="pIsExibirAcoesPadrao" value="true" />
+	<ui:param name="pIsExibirBtnNovo" value="true" />
+
+	<ui:define name="title">
+		<h:outputText value="#{i18n['cidade.paginaNome']}" />
+	</ui:define>
+	
+	<ui:define name="breadCrumb">
+		<p:breadCrumb>
+			<p:menuitem value="#{i18n['breadcrumb.home']}" 	url="/visao/loginVisao/home.xhtml" />
+			<p:menuitem value="#{i18n['breadcrumb.cidade']}" 	url="/visao/cepVisao/listaCidade.xhtml" />
+		</p:breadCrumb>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<p:column width="100px" sortBy="#{item.estado.nome}"
+			filterBy="#{item.estado.nome}" headerText="#{i18n['cidade.estado']}"
+			footerText="#{i18n['colContem']}" filterMatchMode="contains">
+			<h:outputText value="#{item.estado.nome}" />
+		</p:column>
+
+		<p:column width="100px" sortBy="#{item.nome}" filterBy="#{item.nome}"
+			headerText="#{i18n['cidade.nome']}" footerText="#{i18n['colContem']}"
+			filterMatchMode="contains">
+			<h:outputText value="#{item.nome}" />
+		</p:column>
+
+		<p:column width="30px" filterBy="#{item.txFrete}"
+			headerText="#{i18n['cidade.txFrete']}"
+			footerText="#{i18n['colContem']}" filterMatchMode="contains">
+			<h:outputText value="#{item.txFrete}">
+			</h:outputText>
+		</p:column>
+
+	</ui:define>
+	
+	<ui:define name="demaisAcoes">
+	
+		<h:commandLink title="#{i18n['cidade.demaisAcoes.ceps']}"
+			action="#{cepBean.showListagem}">
+			<f:setPropertyActionListener value="#{item}" target="#{cepBean.cidadeCorrente}"/> 
+			<p:graphicImage value="/resources/imagens/ceps.jpg"/>
+		</h:commandLink>
+	
+	</ui:define>
+	
+</ui:composition>
+
+</html>

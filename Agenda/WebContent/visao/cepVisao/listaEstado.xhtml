@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:comps="http://java.sun.com/jsf/composite/comps"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/visao/templates/templateLista.xhtml">
+	
+		<!-- Parametro utilizado pelo templateLista -->
+		<ui:param name="pManagedBean" value="#{estadoBean}"/>
+		<ui:param name="pTituloListagem" value="#{i18n['estado.lista.titulo']}"/>
+		<ui:param name="pQtdeColunasAcoes" value="3" />
+		<ui:param name="pWidthTabela" value="750px" />
+		<ui:param name="pIsExibirAcoesPadrao" value="true" />
+		<ui:param name="pIsExibirBtnNovo" value="true" />
+		
+		<ui:define name="title">
+			<h:outputText value="#{i18n['estado.paginaNome']}" />
+		</ui:define>
+	
+		<ui:define name="content">
+	
+			<!-- Colunas -->
+			<p:column width="100px" sortBy="#{item.nome}"
+				filterBy="#{item.nome}" headerText="#{i18n['estado.nome']}"
+				footerText="#{i18n.colContem}" filterMatchMode="contains">
+				<h:outputText value="#{item.nome}" />
+			</p:column>
+	
+			<p:column width="100px" sortBy="#{item.sigla}"
+				filterBy="#{item.sigla}" headerText="#{i18n['estado.sigla']}"
+				footerText="#{i18n.colContem}" filterMatchMode="contains">
+				<h:outputText value="#{item.sigla}" />
+			</p:column>
+	
+			<p:column width="30px" filterBy="#{item.populacao}"
+				headerText="#{i18n['estado.populacao']}"
+				footerText="#{i18n.colContem}" filterMatchMode="contains" style="text-align:right">
+				<h:outputText value="#{item.populacao}">
+					<f:convertNumber pattern="#,##0" />
+				</h:outputText>
+			</p:column>
+	
+	
+		</ui:define>
+	</ui:composition>
+
+</html>

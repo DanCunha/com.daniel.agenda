@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/visao/templates/templateForm.xhtml">
+		
+		<ui:param name="pManagedBean" value="#{produtoBean}" />
+		
+		<ui:define name="title">
+			<h:outputText value="#{i18n['produto.paginaNome']}" />
+		</ui:define>
+
+		<ui:define name="content">
+
+			<p:panel header="#{i18n['produto.form.titulo']} (#{produtoBean.tipoOperacao})" style="font-size:12px">
+				
+				<h:panelGrid columns="4" >
+				
+					<h:outputLabel for="nome" value="#{i18n['produto.nome']}" />
+					<p:inputText id="nome" label="#{i18n['produto.nome']}"
+						value="#{produtoBean.produto.nome}" style="width:300px" required="true" />
+					<p:watermark for="nome" value="#{i18n['produto.wmNome']}" />
+					<p:message for="nome" />
+
+					<h:outputLabel for="descricao" value="#{i18n['produto.descricao']}" />						
+					<p:editor value="#{produtoBean.produto.descricao}" widgetVar="editor" width="400"
+						required="true" id="descricao" />
+					<p:watermark for="descricao" value="#{i18n['produto.descricao']}" />
+					<p:message for="descricao" />
+
+					<h:outputLabel for="precoInicial"
+						value="#{i18n['produto.precoInicial']}" />
+					<p:inputText id="precoInicial"
+						value="#{produtoBean.produto.precoInicial}" required="true"
+						converter="doubleConversor">
+						<f:convertNumber currencyCode="BRL"/>
+					</p:inputText>
+					<p:watermark for="precoInicial" value="#{i18n['produto.wmPrecoInicial']}" />
+					<p:message for="precoInicial" />
+
+					<h:outputLabel for="categorias" value="#{i18n['produto.categoria']}" />
+					<p:pickList id="categorias" value="#{produtoBean.categorias}"
+						iconOnly="true" var="categoria" itemLabel="#{categoria.nome}"
+						itemValue="#{categoria}" converter="categoriaConversor" />
+					<p:message for="categorias" />
+					<h:outputText value="" />
+					
+					<h:outputText value="Imagem" />
+					
+					<h:panelGroup>
+						<h:graphicImage id="idImagem" value="#{produtoBean.produto.imagem.url}"/>
+					  	<p:fileUpload fileUploadListener="#{produtoBean.doUpLoadImagemProduto}"  
+					            label="Escolher..."
+					            mode="advanced"  
+					            update="idImagem"  
+					            auto="true"  
+					            allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
+					</h:panelGroup>
+
+				</h:panelGrid>
+			</p:panel>
+
+		</ui:define>
+	</ui:composition>
+</html>

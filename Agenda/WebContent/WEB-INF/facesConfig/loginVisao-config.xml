@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+
+	<navigation-rule id="Curinga">
+		<from-view-id>/visao/*</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/visao/loginVisao/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule id="loginVisao">
+
+		<from-view-id>/visao/loginVisao/*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>listaUsuario</from-outcome>
+			<to-view-id>/visao/usuarioVisao/listaUsuario.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>esqueciMinhaSenha</from-outcome>
+			<to-view-id>/visao/loginVisao/esqueciMinhaSenha.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>alterarSenha</from-outcome>
+			<to-view-id>/visao/loginVisao/alterarSenha.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>formUsuario</from-outcome>
+			<to-view-id>/visao/usuarioVisao/formUsuario.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>listaCidade</from-outcome>
+			<to-view-id>/visao/cepVisao/listaCidade.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>formCidade</from-outcome>
+			<to-view-id>/visao/cepVisao/formCidade.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>listaProduto</from-outcome>
+			<to-view-id>/visao/produtoVisao/listaProduto.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>formProduto</from-outcome>
+			<to-view-id>/visao/produtoVisao/formProduto.xhtml</to-view-id>
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>listaCategoria</from-outcome>
+			<to-view-id>/visao/produtoVisao/listaCategoria.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/visao/loginVisao/login.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+
+	<navigation-rule id="cepVisao">
+
+		<from-view-id>/visao/cepVisao/*</from-view-id>
+
+		<navigation-case>
+			<from-outcome>listaEstado</from-outcome>
+			<to-view-id>/visao/cepVisao/listaEstado.xhtml</to-view-id>
+		</navigation-case>
+
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/visao/loginVisao/login.xhtml</to-view-id>
+		</navigation-case>
+
+	</navigation-rule>
+
+</faces-config>

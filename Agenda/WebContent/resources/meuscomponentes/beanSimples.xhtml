@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- 
+Exemplo usando JSF 2.0 (Public Review) apresentado em 30/01/2009 na primeira reunião de 2009 
+do JUGMS (http://jugms.com.br)
+
+Autor: Gilliard Santos Cordeiro (http://gilliard.eti.br)
+ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+
+<body>
+
+	<composite:interface name="beanSimples">
+	    <composite:attribute name="bean" required="true">
+	    	<composite:attribute name="descricao" type="String" required="true"/>
+	    </composite:attribute>
+	</composite:interface>
+	
+	<composite:implementation>
+	    Descrição: <h:inputText id="descricao" value="#{compositeComponent.attrs.bean.descricao}"/>
+	</composite:implementation>
+
+</body>
+</html>

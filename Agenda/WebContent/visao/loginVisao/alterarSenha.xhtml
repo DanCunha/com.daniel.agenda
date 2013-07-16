@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/visao/templates/template2.xhtml">
+		<ui:define name="titulo">
+			<h:outputText value="#{i18n['alterar.paginaNome']}" />
+		</ui:define>
+	
+		<ui:define name="content">
+	
+			<p:panel header="#{i18n['alterar.header']}"
+				footer="#{i18n['alterar.footer']}"
+				style="font-size:12px">
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputText for="usuario" value="#{i18n['alterar.usuario']}:" />
+						<h:outputText label="#{i18n['alterar.usuario']}" value="#{loginBean.usuarioLogado.login}" />
+						
+						<h:outputText value="" />
+						<!-- Informa Senha Atual -->
+						<h:outputText for="senhaAtual" value="#{i18n['alterar.senhaAtual']}"/>
+						<p:inputText label="#{i18n['alterar.senhaAtual']}" value="#{loginBean.usuarioAlterarSenha.senhaAtual}"/>
+						
+						<h:outputText value="" />
+						<!-- Digita nova Senha -->
+						<h:outputText for="senha" value="#{i18n['alterar.senha']}" />
+						<p:inputText label="#{i18n['alterar.senha']}" value="#{loginBean.usuarioAlterarSenha.senhaNova}" />
+						
+						<h:outputText value="" />
+						<!-- Confirma Senha! -->
+						<h:outputText for="confimSenha" value="#{i18n['alterar.confirmaSenha']}" />
+						<p:inputText label="#{i18n['alterar.confirmaSenha']}" value="#{loginBean.usuarioAlterarSenha.senhaNovaConfirmacao}"/>
+						
+						
+						<p:commandButton ajax="false" value="#{i18n['alterar.confirma']}" action="#{loginBean.doAlterarSenha}" />
+
+					</h:panelGrid>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+
+</html>

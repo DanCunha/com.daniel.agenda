@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<ui:composition template="/visao/templates/templateForm.xhtml">
+		<ui:param name="pManagedBean" value="#{cepBean}" />
+		
+		<ui:define name="title">
+			<h:outputText value="#{i18n['cep.paginaNome']}"/>
+		</ui:define>
+		
+		<ui:define name="breadCrumb">
+			<p:breadCrumb>
+				<p:menuitem value="#{i18n['breadcrumb.home']}" url="/visao/loginVisao/home.xhtml" />
+				<p:menuitem value="#{i18n['breadcrumb.cidade']}" url="/visao/cepVisao/listaCidade.xhtml" />
+				<p:menuitem value="#{i18n['breadcrumb.cep']}" url="/visao/cepVisao/listaCep.xhtml" />
+				<p:menuitem value="#{i18n['breadcrumb.formCep']}" url="/visao/cepVisao/formCep.xhtml" />
+			</p:breadCrumb>
+		</ui:define>
+		
+		<ui:define name="content"> 
+			
+				<p:panel header="#{i18n['cep.form.titulo']} (#{cepBean.tipoOperacao})" style="font-size:12px">
+				
+					<h:panelGrid columns="4">
+					
+						<h:outputLabel for="nome" value="#{i18n['cep.cidade']}"/>
+						<h:outputText id="nome" value="#{cepBean.cep.cidade.nome}"/>
+						<p:watermark for="nome" value="" />
+						<p:message for="nome" /> 
+
+						<h:outputLabel for="codigo" value="#{i18n['cep.codigo']}"/>
+						<p:inputMask converter="cepConversor" id="codigo" label="#{i18n['cep.codigo']}" value="#{cepBean.cep.codigo}" required="true" mask="99.999-999"/>
+						<p:watermark for="codigo" value="" />
+						<p:message for="codigo" /> 
+	
+						<h:outputLabel for="rua" value="#{i18n['cep.rua']}"/>
+						<p:inputText id="rua" label="#{i18n['cep.rua']}" value="#{cepBean.cep.rua}" required="true"/>
+						<p:watermark for="rua" value="#{i18n['cep.wmRua']}" />
+						<p:message for="rua" /> 
+						
+						<h:outputLabel for="bairro" value="#{i18n['cep.bairro']}"/>
+						<p:inputText id="bairro" label="#{i18n['cep.bairro']}" value="#{cepBean.cep.bairro}" required="true"/>
+						<p:watermark for="bairro" value="#{i18n['cep.wmBairro']}" />
+						<p:message for="bairro" /> 
+
+					</h:panelGrid>
+				</p:panel>
+				
+		</ui:define>
+	</ui:composition>
+	
+</html>

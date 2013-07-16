@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:body>
+ 		<ui:composition template="/visao/templates/template2.xhtml">
+			<ui:define name="title">
+				<h:outputText value="#{i18n['home.nomePagina']}"/>
+			</ui:define>
+			<ui:define name="content">
+				<h:form>
+					<p:idleMonitor timeout="50000" onidle="idleDialog.show();"
+						onactive="idleDialog.hide();" />
+
+					<p:dialog header="#{i18n.idleMonitorNome}" resizable="false"
+						widgetVar="idleDialog" modal="true" width="400">
+						<h:outputText value="#{i18n.idleMonitorMessage}" />
+					</p:dialog>
+				
+					<p:panel header="#{i18n['home.pgInicial']}" style="font-size:12px">
+						<h:panelGrid columns="2">
+					        <p:panel id="painelJogador" header="#{i18n['home.painelJogador']}">  
+					        	<p:dataTable value="#{loginBean.listaUsuarios}" var="item">
+				        			<p:column style="width:130px;text-align:center" 
+									  	headerText="#{i18n['produto.imagem']}">
+										<h:graphicImage value="#{item.imagem.url}" width="50" height="50"/>
+									</p:column>
+						
+									<p:column  width="100px" headerText="#{i18n['produto.nome']}" >
+										<h:outputText value="#{item.nome}" />
+									</p:column>
+									
+									<p:column style="width:135px;text-align:right" headerText="#{i18n['produto.precoInicial']}">
+										<h:outputText value="#{item.login}">
+										</h:outputText>
+									</p:column>
+									
+					        	</p:dataTable>
+	
+					        </p:panel>  
+
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			
+			</ui:define>
+		</ui:composition>
+ 	</h:body>
+	
+</html>

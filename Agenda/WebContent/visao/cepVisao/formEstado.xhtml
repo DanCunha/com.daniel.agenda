@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="/visao/templates/templateForm.xhtml">
+	
+		<!-- Parametro utilizado pelo templateLista -->
+		<ui:param name="pManagedBean" value="#{estadoBean}"/>
+	
+		<ui:define name="title">
+			<h:outputText value="#{i18n['estado.paginaNome']}" />
+		</ui:define>
+		<ui:define name="content">
+
+				<p:panel header="#{i18n['estado.form.titulo']} ( #{estadoBean.tipoOperacao} )" style="font-size:12px">
+
+					<h:panelGrid columns="4">
+
+						<h:outputLabel for="nome" value="#{i18n['estado.nome']}"/>
+						<p:inputText id="nome" title="Digite o nome do estado" label="#{i18n['estado.nome']}" value="#{estadoBean.estado.nome}" required="true"/>
+						<p:watermark for="nome" value="#{i18n['estado.wmNome']}" />
+						<p:message for="nome"/>
+	
+						<h:outputLabel for="sigla" value="#{i18n['estado.sigla']}"/>
+						<p:inputText id="sigla" label="#{i18n['estado.sigla']}" value="#{estadoBean.estado.sigla}" required="true" />
+						<p:watermark for="sigla" value="#{i18n['estado.wmSigla']}" />
+						<p:message for="sigla"/>
+						
+						<h:outputLabel for="populacao" value="#{i18n['estado.populacao']}"/>
+						<p:inputText id="populacao" label="#{i18n['estado.populacao']}" value="#{estadoBean.estado.populacao}" required="true">
+							<f:convertNumber pattern="#,##0"/>
+						</p:inputText>
+						<p:watermark for="populacao" value="" />
+						<p:message for="populacao" />
+
+					</h:panelGrid>
+
+				</p:panel>
+
+		</ui:define>
+	</ui:composition>
+	
+</html>
