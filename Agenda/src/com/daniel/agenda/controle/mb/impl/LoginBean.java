@@ -54,7 +54,7 @@ public class LoginBean implements Serializable{
 		String forward = "home";
 		try {
 			
-			System.out.println("Aqui---");
+			System.out.println("Aqui Teste");
 			administracaoDominio.popularBD();
 			usuarioLogado = usuarioServico.autenticarUsuario(usuarioLogado);
 			prepararMenu();
