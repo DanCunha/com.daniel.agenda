@@ -12,22 +12,26 @@
 		<ui:param name="pManagedBean" value="#{usuarioBean}" />
 		
 		<ui:define name="title">
-			<h:outputText value="#{i18n['produto.paginaNome']}" />
+			<h:outputText value="#{i18n['funcionario.paginaNome']}" />
 		</ui:define>
 
 		<ui:define name="content">
 
-			<p:panel header="#{i18n['produto.form.titulo']} (#{usuarioBean.tipoOperacao})" style="font-size:12px">
+			<p:panel header="#{i18n['funcionario.form.titulo']} (#{usuarioBean.tipoOperacao})" style="font-size:12px">
 				
 				<h:panelGrid columns="4" >
 				
-					<h:outputLabel for="nome" value="#{i18n['produto.nome']}" />
-					<p:inputText id="nome" label="#{i18n['produto.nome']}"
-						value="#{usuarioBean.usuario.nome}" style="width:300px" required="true" />
-					<p:watermark for="nome" value="#{i18n['produto.wmNome']}" />
+					<h:outputLabel for="nome" value="#{i18n['funcionario.nome']}" />
+					<p:inputText id="nome" label="#{i18n['funcionario.nome']}"
+						value="#{usuarioBean.usuario.nome}" style="width:300px" required="true"/>
+					<p:watermark for="nome" value="#{i18n['funcionario.wmNome']}" />
 					<p:message for="nome" />
 
-
+					<h:outputLabel for="login" value="#{i18n['funcionario.login']}" />
+					<p:inputText id="login" label="#{i18n['funcionario.nome']}"
+						value="#{usuarioBean.usuario.login}" style="width:300px" required="true" />
+					<p:watermark for="login" value="#{i18n['funcionario.login']}" />
+					<p:message for="login" />
 
 
 

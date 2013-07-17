@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 
 import com.daniel.agenda.modelo.negocio.dominios.IAdministracaoDominio;
 import com.daniel.agenda.modelo.negocio.servicos.IUsuarioServico;
+import com.daniel.agenda.modelo.negocio.util.GenericoBean;
 import com.daniel.agenda.modelo.persistencia.entidades.Usuario;
 import com.daniel.agenda.modelo.persistencia.enums.TipoUsuarioEnum;
 
@@ -26,7 +27,7 @@ import com.daniel.agenda.modelo.persistencia.enums.TipoUsuarioEnum;
 @Controller
 @ManagedBean
 @SessionScoped
-public class LoginBean implements Serializable{
+public class LoginBean extends GenericoBean implements Serializable{
 	
 	private static final long serialVersionUID = -7415860251834955154L;
 
