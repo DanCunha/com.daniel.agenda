@@ -71,8 +71,16 @@ public class UsuarioBean extends GenericoBean implements ICRUDBean{
 
 	@Override
 	public String showEditar() throws EntidadeInexistenteException {
-		// TODO Auto-generated method stub
-		return null;
+		String forward = "formUsuario";
+
+		Long entityId = new Long(FacesUtil.getRequestParameter("entityId"));
+		usuario = (Usuario) FacesUtil.getObjeto(lista, entityId);
+
+		prepararListaUsuario();
+
+		setTipoOperacao(TipoOperacaoBeanEnum.EDITANDO);
+
+		return forward;
 	}
 
 	@Override
@@ -130,8 +138,16 @@ public class UsuarioBean extends GenericoBean implements ICRUDBean{
 	@Override
 	public String doSalvarESair() throws ObjetoNaoEncontradoException,
 			EntidadeInexistenteException {
-		// TODO Auto-generated method stub
-		return null;
+		String forward = "listaProduto";
+
+		usuario.setTipoUsuarioEnum(TipoUsuarioEnum.USUARIO_COMUM);
+		usuarioServico.salvarObjeto(usuario);
+
+		doPesquisar(null);
+		
+		addMessage(FacesMessage.SEVERITY_INFO, null, "O produto "+usuario.getNome()+" foi salvo com sucesso!");
+
+		return forward;
 	}
 
 	@Override
