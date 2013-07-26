@@ -138,7 +138,7 @@ public class UsuarioBean extends GenericoBean implements ICRUDBean{
 	@Override
 	public String doSalvarESair() throws ObjetoNaoEncontradoException,
 			EntidadeInexistenteException {
-		String forward = "listaProduto";
+		String forward = "listaUsuario";
 
 		usuario.setTipoUsuarioEnum(TipoUsuarioEnum.USUARIO_COMUM);
 		usuarioServico.salvarObjeto(usuario);
