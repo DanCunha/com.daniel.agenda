@@ -20,7 +20,7 @@
 			<p:panel header="#{i18n['funcionario.form.titulo']} (#{usuarioBean.tipoOperacao})" style="font-size:12px">
 				
 				<h:panelGrid columns="4" >
-				
+					<p:focus for="nome"/>
 					<h:outputLabel for="nome" value="#{i18n['funcionario.nome']}" />
 					<p:inputText id="nome" label="#{i18n['funcionario.nome']}"
 						value="#{usuarioBean.usuario.nome}" style="width:300px" required="true"/>
