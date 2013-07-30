@@ -34,23 +34,13 @@
 					<p:message for="login" />
 					
 					<h:outputLabel for="dataNasc" value="#{i18n['funcionario.dataNasc']}" />
-					<p:calendar value="#{usuarioBean.usuario.data_nascimento}" id="popupButtonCal" showOn="button" pattern="dd/MM/yyyy" />
+					<p:calendar value="#{usuarioBean.usuario.data_nascimento}" id="popupButtonCal" showOn="button" pattern="dd/MM/yyyy" converter="javax.faces.DateTime"/>
 
 	
 		<p:dialog header="Selected Dates" widgetVar="dialog" 
 			showEffect="fade" hideEffect="fade">
 	
 		<h:panelGrid id="display" columns="2" cellpadding="5">
-		
-			<h:outputText value="Inline Date:" />
-			<h:outputText value="#{calendarBean.date1}" id="inlineDate">
-				<f:convertDateTime pattern="d/M/yyyy"/>
-			</h:outputText>
-			
-			<h:outputText value="Popup Date:" />
-			<h:outputText value="#{calendarBean.date2}" id="popupDate">
-				<f:convertDateTime pattern="d/M/yyyy"/>
-			</h:outputText>
 			
 			<h:outputText value="Popup Button Date: " />
 			<h:outputText value="#{usuarioBean.usuario.data_nascimento}" id="popupButtonDate">

@@ -1,6 +1,6 @@
 package com.daniel.agenda.modelo.persistencia.entidades;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class Usuario extends ValueObject{
 	private String nome;
 	private String login;
 	private String senha;
-	private Calendar data_nascimento;
+	private Date data_nascimento;
 	
 	@OneToOne
 	private Departamento departamento;
@@ -62,10 +62,11 @@ public class Usuario extends ValueObject{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Calendar getData_nascimento() {
+
+	public Date getData_nascimento() {
 		return data_nascimento;
 	}
-	public void setData_nascimento(Calendar data_nascimento) {
+	public void setData_nascimento(Date data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
 	public TipoUsuarioEnum getTipoUsuarioEnum() {
